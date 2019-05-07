@@ -1,0 +1,175 @@
+{
+    "type": "object",
+    "properties": {
+        "scope": {
+            "required": true,
+            "type": "string"
+        },
+        "eventSubscriptionName": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "description": "Definition of a Resource",
+                    "properties": {
+                        "id": {
+                            "description": "Fully qualified identifier of the resource",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "name": {
+                            "description": "Name of the resource",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "type": {
+                            "description": "Type of the resource",
+                            "readOnly": true,
+                            "type": "string"
+                        }
+                    },
+                    "type": "object",
+                    "x-ms-azure-resource": true
+                }
+            ],
+            "description": "Event Subscription",
+            "properties": {
+                "properties": {
+                    "description": "Properties of the event subscription",
+                    "x-ms-client-flatten": true,
+                    "properties": {
+                        "deadLetterDestination": {
+                            "description": "The DeadLetter destination of the event subscription.",
+                            "discriminator": {
+                                "propertyName": "endpointType"
+                            },
+                            "properties": {
+                                "endpointType": {
+                                    "description": "Type of the endpoint for the dead letter destination",
+                                    "enum": [
+                                        "StorageBlob"
+                                    ],
+                                    "type": "string",
+                                    "x-ms-enum": {
+                                        "modelAsString": true,
+                                        "name": "DeadLetterEndPointType"
+                                    }
+                                }
+                            },
+                            "required": [
+                                "endpointType"
+                            ],
+                            "type": "object"
+                        },
+                        "destination": {
+                            "description": "Information about the destination where events have to be delivered for the event subscription.",
+                            "discriminator": {
+                                "propertyName": "endpointType"
+                            },
+                            "properties": {
+                                "endpointType": {
+                                    "description": "Type of the endpoint for the event subscription destination",
+                                    "enum": [
+                                        "WebHook",
+                                        "EventHub",
+                                        "StorageQueue",
+                                        "HybridConnection"
+                                    ],
+                                    "type": "string",
+                                    "x-ms-enum": {
+                                        "modelAsString": true,
+                                        "name": "EndpointType"
+                                    }
+                                }
+                            },
+                            "required": [
+                                "endpointType"
+                            ],
+                            "type": "object"
+                        },
+                        "filter": {
+                            "description": "Information about the filter for the event subscription.",
+                            "properties": {
+                                "includedEventTypes": {
+                                    "description": "A list of applicable event types that need to be part of the event subscription. \r\nIf it is desired to subscribe to all event types, the string \"all\" needs to be specified as an element in this list.",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "isSubjectCaseSensitive": {
+                                    "default": false,
+                                    "description": "Specifies if the SubjectBeginsWith and SubjectEndsWith properties of the filter \r\nshould be compared in a case sensitive manner.",
+                                    "type": "boolean"
+                                },
+                                "subjectBeginsWith": {
+                                    "description": "An optional string to filter events for an event subscription based on a resource path prefix.\r\nThe format of this depends on the publisher of the events. \r\nWildcard characters are not supported in this path.",
+                                    "type": "string"
+                                },
+                                "subjectEndsWith": {
+                                    "description": "An optional string to filter events for an event subscription based on a resource path suffix.\r\nWildcard characters are not supported in this path.",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "labels": {
+                            "description": "List of user defined labels.",
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "provisioningState": {
+                            "description": "Provisioning state of the event subscription.",
+                            "enum": [
+                                "Creating",
+                                "Updating",
+                                "Deleting",
+                                "Succeeded",
+                                "Canceled",
+                                "Failed",
+                                "AwaitingManualAction"
+                            ],
+                            "readOnly": true,
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": true,
+                                "name": "EventSubscriptionProvisioningState"
+                            }
+                        },
+                        "retryPolicy": {
+                            "description": "The retry policy for events. This can be used to configure maximum number of delivery attempts and time to live for events.",
+                            "properties": {
+                                "eventTimeToLiveInMinutes": {
+                                    "description": "Time To Live (in minutes) for events.",
+                                    "format": "int32",
+                                    "type": "integer"
+                                },
+                                "maxDeliveryAttempts": {
+                                    "description": "Maximum number of delivery retry attempts for events.",
+                                    "format": "int32",
+                                    "type": "integer"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "topic": {
+                            "description": "Name of the topic of the event subscription.",
+                            "readOnly": true,
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

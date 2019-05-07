@@ -1,0 +1,509 @@
+{
+    "title": "EventGridManagementClient",
+    "description": "Azure EventGrid Management Client",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/azure.com/eventgrid-EventGrid/2019-01-01/swagger.json",
+    "envVars": {
+        "OAUTH_CLIENT_ID": {
+            "description": "OAuth Client ID"
+        },
+        "OAUTH_CLIENT_SECRET": {
+            "description": "OAuth Client Secret"
+        }
+    },
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://management.azure.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "azure_auth": {
+                "label": "Azure Active Directory OAuth2 Flow",
+                "viewClass": "OAuthFieldView"
+            }
+        },
+        "oauth2": {
+            "client_id": "{{OAUTH_CLIENT_ID}}",
+            "client_secret": "{{OAUTH_CLIENT_SECRET}}",
+            "auth_uri": "https://login.microsoftonline.com/common/oauth2/authorize"
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "Operations_List": {
+            "main": "./lib/actions/Operations_List.js",
+            "title": "List available operations",
+            "description": "List the available operations supported by the Microsoft.EventGrid resource provider",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Operations_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "TopicTypes_List": {
+            "main": "./lib/actions/TopicTypes_List.js",
+            "title": "List topic types",
+            "description": "List all registered topic types",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/TopicTypes_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "TopicTypes_Get": {
+            "main": "./lib/actions/TopicTypes_Get.js",
+            "title": "Get a topic type",
+            "description": "Get information about a topic type",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/TopicTypes_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "TopicTypes_ListEventTypes": {
+            "main": "./lib/actions/TopicTypes_ListEventTypes.js",
+            "title": "List event types",
+            "description": "List event types for a topic type",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/TopicTypes_ListEventTypes.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventSubscriptions_ListGlobalBySubscription": {
+            "main": "./lib/actions/EventSubscriptions_ListGlobalBySubscription.js",
+            "title": "Get an aggregated list of all global event subscriptions under an Azure subscription",
+            "description": "List all aggregated global event subscriptions under a specific Azure subscription",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventSubscriptions_ListGlobalBySubscription.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventSubscriptions_ListRegionalBySubscription": {
+            "main": "./lib/actions/EventSubscriptions_ListRegionalBySubscription.js",
+            "title": "List all regional event subscriptions under an Azure subscription",
+            "description": "List all event subscriptions from the given location under a specific Azure subscription",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventSubscriptions_ListRegionalBySubscription.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventSubscriptions_ListRegionalBySubscriptionForTopicType": {
+            "main": "./lib/actions/EventSubscriptions_ListRegionalBySubscriptionForTopicType.js",
+            "title": "List all regional event subscriptions under an Azure subscription for a topic type",
+            "description": "List all event subscriptions from the given location under a specific Azure subscription and topic type.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventSubscriptions_ListRegionalBySubscriptionForTopicType.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventSubscriptions_ListGlobalBySubscriptionForTopicType": {
+            "main": "./lib/actions/EventSubscriptions_ListGlobalBySubscriptionForTopicType.js",
+            "title": "List all global event subscriptions for a topic type",
+            "description": "List all global event subscriptions under an Azure subscription for a topic type.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventSubscriptions_ListGlobalBySubscriptionForTopicType.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Topics_ListBySubscription": {
+            "main": "./lib/actions/Topics_ListBySubscription.js",
+            "title": "List topics under an Azure subscription",
+            "description": "List all the topics under an Azure subscription",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Topics_ListBySubscription.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventSubscriptions_ListGlobalByResourceGroup": {
+            "main": "./lib/actions/EventSubscriptions_ListGlobalByResourceGroup.js",
+            "title": "List all global event subscriptions under an Azure subscription and resource group",
+            "description": "List all global event subscriptions under a specific Azure subscription and resource group",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventSubscriptions_ListGlobalByResourceGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventSubscriptions_ListRegionalByResourceGroup": {
+            "main": "./lib/actions/EventSubscriptions_ListRegionalByResourceGroup.js",
+            "title": "List all regional event subscriptions under an Azure subscription and resource group",
+            "description": "List all event subscriptions from the given location under a specific Azure subscription and resource group",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventSubscriptions_ListRegionalByResourceGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventSubscriptions_ListRegionalByResourceGroupForTopicType": {
+            "main": "./lib/actions/EventSubscriptions_ListRegionalByResourceGroupForTopicType.js",
+            "title": "List all regional event subscriptions under an Azure subscription and resource group for a topic type",
+            "description": "List all event subscriptions from the given location under a specific Azure subscription and resource group and topic type",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventSubscriptions_ListRegionalByResourceGroupForTopicType.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventSubscriptions_ListGlobalByResourceGroupForTopicType": {
+            "main": "./lib/actions/EventSubscriptions_ListGlobalByResourceGroupForTopicType.js",
+            "title": "List all global event subscriptions under a resource group for a topic type",
+            "description": "List all global event subscriptions under a resource group for a specific topic type.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventSubscriptions_ListGlobalByResourceGroupForTopicType.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Topics_ListByResourceGroup": {
+            "main": "./lib/actions/Topics_ListByResourceGroup.js",
+            "title": "List topics under a resource group",
+            "description": "List all the topics under a resource group",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Topics_ListByResourceGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Topics_Delete": {
+            "main": "./lib/actions/Topics_Delete.js",
+            "title": "Delete a topic",
+            "description": "Delete existing topic",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Topics_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Topics_Get": {
+            "main": "./lib/actions/Topics_Get.js",
+            "title": "Get a topic",
+            "description": "Get properties of a topic",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Topics_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Topics_Update": {
+            "main": "./lib/actions/Topics_Update.js",
+            "title": "Update a topic",
+            "description": "Asynchronously updates a topic with the specified parameters.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Topics_Update.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Topics_CreateOrUpdate": {
+            "main": "./lib/actions/Topics_CreateOrUpdate.js",
+            "title": "Create a topic",
+            "description": "Asynchronously creates a new topic with the specified parameters.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Topics_CreateOrUpdate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Topics_ListSharedAccessKeys": {
+            "main": "./lib/actions/Topics_ListSharedAccessKeys.js",
+            "title": "List keys for a topic",
+            "description": "List the two keys used to publish to a topic",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Topics_ListSharedAccessKeys.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Topics_RegenerateKey": {
+            "main": "./lib/actions/Topics_RegenerateKey.js",
+            "title": "Regenerate key for a topic",
+            "description": "Regenerate a shared access key for a topic",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Topics_RegenerateKey.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventSubscriptions_ListByResource": {
+            "main": "./lib/actions/EventSubscriptions_ListByResource.js",
+            "title": "List all event subscriptions for a specific topic",
+            "description": "List all event subscriptions that have been created for a specific topic",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventSubscriptions_ListByResource.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Topics_ListEventTypes": {
+            "main": "./lib/actions/Topics_ListEventTypes.js",
+            "title": "List topic event types",
+            "description": "List event types for a topic",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Topics_ListEventTypes.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventSubscriptions_Delete": {
+            "main": "./lib/actions/EventSubscriptions_Delete.js",
+            "title": "Delete an event subscription",
+            "description": "Delete an existing event subscription",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventSubscriptions_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventSubscriptions_Get": {
+            "main": "./lib/actions/EventSubscriptions_Get.js",
+            "title": "Get an event subscription",
+            "description": "Get properties of an event subscription",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventSubscriptions_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventSubscriptions_Update": {
+            "main": "./lib/actions/EventSubscriptions_Update.js",
+            "title": "Update an event subscription",
+            "description": "Asynchronously updates an existing event subscription.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventSubscriptions_Update.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventSubscriptions_CreateOrUpdate": {
+            "main": "./lib/actions/EventSubscriptions_CreateOrUpdate.js",
+            "title": "Create or update an event subscription",
+            "description": "Asynchronously creates a new event subscription or updates an existing event subscription based on the specified scope.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventSubscriptions_CreateOrUpdate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventSubscriptions_GetFullUrl": {
+            "main": "./lib/actions/EventSubscriptions_GetFullUrl.js",
+            "title": "Get full URL of an event subscription",
+            "description": "Get the full endpoint URL for an event subscription",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventSubscriptions_GetFullUrl.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
